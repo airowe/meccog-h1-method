@@ -23,7 +23,9 @@ The H2 and H4 scripts this work reuses (`assemble.py`, `check_rows.py`, `phtest.
 
 ## 3. How papers were found
 
-All searching ran on 2026-11-23 and 2026-11-24. Every screened record is logged with a decision and a reason in `state/ledger.jsonl` in the work folder: **474 decisions over 259 unique records**.
+All searching ran on 2026-11-23 and 2026-11-24. Every screened record is logged with a decision and a reason in `state/ledger.jsonl` in the work folder: **474 decisions over 408 unique records**.
+
+A correction, recorded because the first version of this file was wrong: that count read **259** until 2026-11-24. The ledger writes a record's identity in different fields depending on the stage that wrote it — `pmid` for most, but `id: "MED:<pmid>"` for the 165 round-1 pH-test rows. A count keyed only on `pmid`/`doi`/`pmcid` treats those as unidentifiable and silently drops them, losing 150 distinct papers that were screened and decided. Resolving the `MED:` prefix gives 408. Checks on that figure: the 150 are distinct and all 8-digit numeric, a known-excluded PMID (29861287) is present, a fabricated PMID is absent, and all 10 included papers are traceable in the ledger. 15 records carry no identifier in any field and are excluded from the 408.
 
 **Round 1 sources:**
 
